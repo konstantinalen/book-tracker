@@ -29,7 +29,7 @@
 
   .tabs 
   {
-    margin-left: 33%;
+    margin-left: 29%;
     cursor: pointer;
     font-weight: bold;
     font-size: larger;
