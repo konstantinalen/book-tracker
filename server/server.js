@@ -12,6 +12,16 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
+app.get('/api/allbooks', async (req, res) => {
+    try {
+        const pool = dbModule.getPool();
+        const [rows] = await pool.query('SELECT * FROM books');
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 async function startApp() {
     try {
         // 1. Build the database if it doesn't exist
