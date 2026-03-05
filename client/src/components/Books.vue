@@ -23,23 +23,17 @@ onMounted(() => {
     <table>
       <thead>
         <tr>
-          <th>ID</th>
           <th>Title</th>
           <th>Author</th>
-          <th>Status</th>
-          <th>Last Seen</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="book in books" :key="book.id">
-          <td>{{ book.id }}</td>
           <td>{{ book.title }}</td>
           <td>{{ book.author }}</td>
-          <td>{{ book.status }}</td>
-          <td>{{ book.last_seen }}</td>
         </tr>
         <tr v-if="books.length === 0">
-          <td colspan="5">No books yet.</td>
+          <td colspan="2">No books yet.</td>
         </tr>
       </tbody>
     </table>

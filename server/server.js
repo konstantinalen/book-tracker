@@ -22,6 +22,25 @@ app.get('/api/allbooks', async (req, res) => {
     }
 });
 
+app.get('/api/scans', async (req, res) => {
+    try {
+        const pool = dbModule.getPool();
+        const [rows] = await pool.query(`
+            SELECT 
+                l.id, 
+                b.title, 
+                b.author, 
+                b.status, 
+                l.timestamp as last_seen 
+            FROM scan_logs l
+            JOIN books b ON l.epc = b.epc
+            ORDER BY l.timestamp DESC 
+        `);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 async function startApp() {
     try {
         // 1. Build the database if it doesn't exist
