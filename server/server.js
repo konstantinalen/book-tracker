@@ -1,0 +1,32 @@
+const express = require('express');
+const { spawn } = require('child_process');
+const http = require('http');
+const { Server } = require("socket.io");
+const cors = require('cors');
+const dbModule = require('./database'); 
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const server = http.createServer(app);
+const io = new Server(server, { cors: { origin: "*" } });
+
+async function startApp() {
+    try {
+        // 1. Build the database if it doesn't exist
+        await dbModule.initializeDatabase();
+        
+        // 2. Once DB is ready, start the web server
+        server.listen(3000, () => {
+            console.log('🚀 Backend running on http://localhost:3000');
+            console.log('📡 Waiting for hardware...');
+        });
+        
+    } catch (error) {
+        console.error("❌ CRITICAL FAILURE: Could not start app.", error);
+        process.exit(1);
+    }
+}
+
+startApp();
