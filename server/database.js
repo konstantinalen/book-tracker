@@ -26,7 +26,7 @@ async function initializeDatabase() {
         CREATE TABLE IF NOT EXISTS books (
             id INT AUTO_INCREMENT PRIMARY KEY,
             epc VARCHAR(50) UNIQUE NOT NULL,
-            title VARCHAR(255) NOT NULL,
+            title VARCHAR(255),
             author VARCHAR(255),
             status ENUM('IN', 'OUT', 'UNKNOWN') DEFAULT 'UNKNOWN',
             last_seen DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -38,7 +38,7 @@ async function initializeDatabase() {
         CREATE TABLE IF NOT EXISTS scan_logs (
             id INT AUTO_INCREMENT PRIMARY KEY,
             epc VARCHAR(50) NOT NULL,
-            reader_ip VARCHAR(50),
+            reader_name VARCHAR(50),
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
         );
     `);
