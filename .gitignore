@@ -2,5 +2,7 @@ node_modules
 client/node_modules
 .env
 server/.env
+server/*.xlsx
+server/*.csv
 dist/
 build/
